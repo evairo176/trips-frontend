@@ -42,17 +42,23 @@ const TripsVisualization = ({
 
   // Hitung rata-rata tarif berdasarkan metode pembayaran
   const fareByPayment = tripsData.reduce((acc: any, trip: any) => {
-    if (!acc[trip.payment_type]) {
-      acc[trip.payment_type] = { totalFare: 0, count: 0 };
+    const fare = Number(trip.fare_amount) || 0; // Pastikan angka
+    const type = trip.payment_type || 'Unknown'; // Default jika tidak ada
+
+    if (!acc[type]) {
+      acc[type] = { totalFare: 0, count: 0 };
     }
-    acc[trip.payment_type].totalFare += trip.fare_amount;
-    acc[trip.payment_type].count += 1;
+    acc[type].totalFare += fare;
+    acc[type].count += 1;
     return acc;
   }, {});
 
   const fareData = Object.keys(fareByPayment).map((key) => ({
     name: key,
-    avgFare: fareByPayment[key].totalFare / fareByPayment[key].count
+    avgFare:
+      fareByPayment[key].count > 0
+        ? fareByPayment[key].totalFare / fareByPayment[key].count
+        : 0 // Hindari pembagian dengan 0
   }));
 
   // Hitung jumlah perjalanan berdasarkan jumlah penumpang
