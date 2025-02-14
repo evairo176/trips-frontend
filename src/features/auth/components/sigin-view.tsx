@@ -5,6 +5,7 @@ import { StarIcon } from 'lucide-react';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import UserAuthForm from './user-auth-form';
+import { Suspense } from 'react';
 
 export const metadata: Metadata = {
   title: 'Authentication',
@@ -65,7 +66,9 @@ export default function SignInViewPage({ stars }: { stars: number }) {
             href={'https://github.com/kiranism/next-shadcn-dashboard-starter'}
           >
             <div className='flex items-center'>
-              <GitHubLogoIcon className='size-4' />
+              <Suspense>
+                <GitHubLogoIcon className='size-4' />
+              </Suspense>
               <span className='ml-1 inline'>Star on GitHub</span>{' '}
             </div>
             <div className='ml-2 flex items-center gap-1 text-sm md:flex'>

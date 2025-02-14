@@ -12,7 +12,7 @@ import { Input } from '@/components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
@@ -132,7 +132,9 @@ export default function UserAuthForm() {
           </span>
         </div>
       </div>
-      <GithubSignInButton />
+      <Suspense>
+        <GithubSignInButton />
+      </Suspense>
     </>
   );
 }
