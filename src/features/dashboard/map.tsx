@@ -134,7 +134,7 @@ const Map = () => {
       toast.error('Error: Pickup and dropoff locations are the same.');
       return;
     }
-
+    // redeploy
     const API_KEY = process.env.NEXT_PUBLIC_TOKEN_API_ROUTE;
     const url = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${API_KEY}&start=${trip.pickup_longitude},${trip.pickup_latitude}&end=${trip.dropoff_longitude},${trip.dropoff_latitude}`;
 
